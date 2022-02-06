@@ -4,12 +4,16 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 window.addEventListener("load", function () {
-  let contents = new Blob( [ "Hello World!" ] );
-  let a = document.createElement("a");
-  a.href = URL.createObjectURL(contents);
-  a.download = "hello.txt";
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  URL.revokeObjectURL(a.href);
+  try {
+    let contents = new Blob( [ "Hello World!" ] );
+    let a = document.createElement("a");
+    a.href = URL.createObjectURL(contents);
+    a.download = "hello.txt";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(a.href);
+  } catch (e) {
+    alert(e.message);
+  }
 });
