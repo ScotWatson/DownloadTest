@@ -28,15 +28,31 @@ function downloadFileLink(contents, filename) {
   }
 }
 function downloadFileAPI(contents, filename) {
-  let promiseDirectory = window.showDirectoryPicker();
-  let promiseFile = promiseDirectory.then(function (hdlParentDirectory) {
-    return hdlParentDirectory.getFileHandle(filename, { create: true } );
-  });
-  let promiseFileStream = promiseFile.then(function (hdlFile) {
-    return hdlFile.createWritable();
-  });
-  promiseFileStream.then(function (stream) {
-    stream.write(contents);
-    stream.close();
-  });
+  try {
+    let promiseDirectory = window.showDirectoryPicker();
+    let promiseFile = promiseDirectory.then(function (hdlParentDirectory) {
+      try {
+        return hdlParentDirectory.getFileHandle(filename, { create: true } );
+      } catch (e) {
+        alert(e.message);
+      }
+    });
+    let promiseFileStream = promiseFile.then(function (hdlFile) {
+      try {
+        return hdlFile.createWritable();
+      } catch (e) {
+        alert(e.message);
+      }
+    });
+    promiseFileStream.then(function (stream) {
+      try {
+        stream.write(contents);
+        stream.close();
+      } catch (e) {
+        alert(e.message);
+      }
+    });
+  } catch (e) {
+    alert(e.message);
+  }
 }
