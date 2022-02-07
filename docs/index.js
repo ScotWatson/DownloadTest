@@ -4,12 +4,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 window.addEventListener("load", function () {
-  let divLink = document.getElementById("divLink");
-  let divAPI = document.getElementById("divAPI");
-  divLink.addEventListener("click", function () {
+  let btnLink = document.getElementById("btnLink");
+  let btnAPI = document.getElementById("btnAPI");
+  btnLink.addEventListener("click", function () {
     downloadFileLink("Hello World!", "hello.txt");
   });
-  divAPI.addEventListener("click", function () {
+  btnAPI.addEventListener("click", function () {
     downloadFileAPI("Hello World!", "hello.txt");
   });
 });
