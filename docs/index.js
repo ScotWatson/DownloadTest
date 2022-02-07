@@ -17,7 +17,7 @@ function downloadFileLink(contents, filename) {
   try {
     let blobContents = new Blob( [ contents ] );
     let a = document.createElement("a");
-    a.href = URL.createObjectURL(contents);
+    a.href = URL.createObjectURL(blobContents);
     a.download = filename;
     document.body.appendChild(a);
     a.click();
