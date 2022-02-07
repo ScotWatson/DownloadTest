@@ -36,8 +36,7 @@ function downloadFileAPI(contents, filename) {
     return hdlFile.createWritable();
   });
   promiseFileStream.then(function (stream) {
-    console.log(stream);
-    console.log(contents);
     stream.write(contents);
+    stream.close();
   });
 }
