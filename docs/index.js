@@ -28,6 +28,7 @@ function downloadFileLink(contents, filename) {
   }
 }
 function downloadFileAPI(contents, filename) {
+  alert("click");
   try {
     let promiseDirectory = window.showDirectoryPicker();
     let promiseFile = promiseDirectory.then(function (hdlParentDirectory) {
