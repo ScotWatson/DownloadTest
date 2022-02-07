@@ -29,6 +29,8 @@ function downloadFileLink(contents, filename) {
 }
 function downloadFileAPI(contents, filename) {
   let hdlParentDirectory = window.showDirectoryPicker();
+  console.log(hdlParentDirectory);
+  console.log(Object.getOwnPropertyDescriptors(hdlParentDirectory));
   let promiseFile = hdlParentDirectory.getFileHandle(filename, { create: true } );
   let promiseFileStream = promiseFile.then(function (hdlFile) {
     return hdlFile.createWritable();
