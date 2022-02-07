@@ -4,16 +4,21 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 window.addEventListener("load", function () {
-  let thisDiv = document.getElementById("thisDiv");
-  thisDiv.addEventListener("click", downloadFile);
-  downloadFile();
+  let divLink = document.getElementById("divLink");
+  let divAPI = document.getElementById("divAPI");
+  divLink.addEventListener("click", function () {
+    downloadFileLink("Hello World!", "hello.txt");
+  });
+  divAPI.addEventListener("click", function () {
+    downloadFileAPI("Hello World!", "hello.txt");
+  });
 });
-function downloadFile() {
+function downloadFileLink(content, filename) {
   try {
-    let contents = new Blob( [ "Hello World!" ] );
+    let blobContents = new Blob( [ contents ] );
     let a = document.createElement("a");
     a.href = URL.createObjectURL(contents);
-    a.download = "hello.txt";
+    a.download = filename;
     document.body.appendChild(a);
     a.click();
     a.remove();
@@ -21,4 +26,14 @@ function downloadFile() {
   } catch (e) {
     alert(e.message);
   }
+}
+function downloadFileAPI(content, filename) {
+  let hdlParentDirectory = window.showDirectoryPicker();
+  let promiseFile = hdlParentDirectory.getFileHandle(filename, { create: true } );
+  let promiseFileStream = promiseFile.then(function (hdlFile) {
+    return hdlFile.createWritable();
+  });
+  promiseFileStream.then(function (stream) {
+    stream.write(content);
+  });
 }
