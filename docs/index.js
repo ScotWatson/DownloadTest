@@ -13,7 +13,7 @@ window.addEventListener("load", function () {
     downloadFileAPI("Hello World!", "hello.txt");
   });
 });
-function downloadFileLink(content, filename) {
+function downloadFileLink(contents, filename) {
   try {
     let blobContents = new Blob( [ contents ] );
     let a = document.createElement("a");
@@ -27,13 +27,13 @@ function downloadFileLink(content, filename) {
     alert(e.message);
   }
 }
-function downloadFileAPI(content, filename) {
+function downloadFileAPI(contents, filename) {
   let hdlParentDirectory = window.showDirectoryPicker();
   let promiseFile = hdlParentDirectory.getFileHandle(filename, { create: true } );
   let promiseFileStream = promiseFile.then(function (hdlFile) {
     return hdlFile.createWritable();
   });
   promiseFileStream.then(function (stream) {
-    stream.write(content);
+    stream.write(contents);
   });
 }
